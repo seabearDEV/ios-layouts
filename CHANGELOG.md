@@ -5,6 +5,36 @@ All notable changes to SeaBearKit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2025-11-16
+
+### Added
+- **View Modifiers Package**: New essential modifiers for cleaner SwiftUI code
+  - **Conditional Modifiers**: `.if(_:transform:)` for applying transformations based on conditions
+    - Single-branch variant for optional transformations
+    - Two-branch variant with `then:` and `else:` closures
+  - **Glass Shadow System**: `.glassShadow(isPressed:intensity:)` for unified shadow application
+    - Three intensity levels: `.subtle`, `.regular`, `.prominent`
+    - Automatic press state handling with reduced shadow on press
+    - Custom shadow variant with explicit parameters
+  - **Adaptive Corner Radius**: Proportional corner radius system that scales across device sizes
+    - `.adaptiveCornerRadius(_:size:)` modifier for percentage-based rounding
+    - `CornerRadiusStyle` presets: `.square`, `.slight`, `.moderate`, `.round`, `.circle`
+    - Helper methods: `calculateCornerRadius(percent:size:)` and variant with padding adjustment
+- **Interactive Previews**: All new modifiers include comprehensive SwiftUI previews
+- **Documentation**: Extensive inline documentation with usage examples for all new APIs
+
+### Changed
+- Library version updated from 1.2.0 to 1.3.0
+- README updated with new "View Modifiers" section showcasing all three modifier systems
+- Features section reorganized for better clarity (Navigation & Backgrounds, View Modifiers, General)
+- Main module documentation updated to list new modifier APIs
+
+### Technical
+- New `Modifiers/` directory in package structure containing three focused files
+- All modifiers follow SwiftUI conventions and are fully documented
+- Zero breaking changes - all existing code continues to work
+- Modifiers complement existing Liquid Glass design system
+
 ## [1.2.0] - 2025-10-15
 
 ### Added
@@ -113,6 +143,7 @@ PersistentNavigationLink("Details") {
 }
 ```
 
+[1.3.0]: https://github.com/seabearDEV/SeaBearKit/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/seabearDEV/SeaBearKit/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/seabearDEV/SeaBearKit/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/seabearDEV/SeaBearKit/releases/tag/v1.0.0

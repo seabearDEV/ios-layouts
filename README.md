@@ -15,12 +15,20 @@ This pattern was developed through extensive iteration to address SwiftUI's navi
 
 ## Features
 
+### Navigation & Backgrounds
 - **Automatic Navigation**: Background persistence without manual modifiers
 - **Persistent Background System**: NavigationStack wrapper that maintains backgrounds during transitions
 - **Flexible API**: Choose automatic convenience wrappers or manual control
 - **Gradient Backgrounds**: Configurable gradients with vignette effects (iOS 18+ Liquid Glass compatible)
 - **Custom Backgrounds**: Use any SwiftUI view as a persistent background (images, videos, animations)
 - **Color Palettes**: Extensible palette system with nine built-in themes
+
+### View Modifiers (New in 1.3.0)
+- **Conditional Modifiers**: Clean `.if()` syntax for conditional view transformations
+- **Glass Shadows**: Unified `.glassShadow()` system for Liquid Glass UI with press states
+- **Adaptive Corner Radius**: Proportional corner radius that scales across device sizes
+
+### General
 - **Performance Optimized**: Static gradients with minimal battery impact
 - **Appearance Adaptive**: Automatic light/dark mode support
 - **Material Integration**: Compatible with iOS 18+ material system
@@ -204,6 +212,86 @@ Examples of custom backgrounds:
 - **Custom Views**: Any SwiftUI composition
 
 The same persistent architecture applies - your custom background stays consistent across all navigation transitions.
+
+## View Modifiers
+
+SeaBearKit provides essential view modifiers for cleaner, more maintainable SwiftUI code.
+
+### Conditional Modifiers
+
+Apply transformations based on conditions without duplicating view code:
+
+```swift
+Text("Hello")
+    .if(isHighlighted) { view in
+        view.foregroundStyle(.red)
+    }
+    .if(colorScheme == .dark) { view in
+        view.background(.black)
+    }
+
+// With both branches
+Text("Status")
+    .if(isActive,
+        then: { $0.foregroundStyle(.green) },
+        else: { $0.foregroundStyle(.gray) }
+    )
+```
+
+### Glass Shadows
+
+Unified shadow system optimized for Liquid Glass design with automatic press state handling:
+
+```swift
+// Basic shadow
+Button("Action") { }
+    .buttonStyle(.borderedProminent)
+    .glassShadow()
+
+// With press state
+struct GlassButton: View {
+    @State private var isPressed = false
+
+    var body: some View {
+        Text("Press Me")
+            .padding()
+            .background(.regularMaterial)
+            .glassShadow(isPressed: isPressed, intensity: .regular)
+            .scaleEffect(isPressed ? 0.97 : 1.0)
+    }
+}
+
+// Different intensities
+view.glassShadow(intensity: .subtle)     // Subtle elevation
+view.glassShadow(intensity: .regular)    // Standard (default)
+view.glassShadow(intensity: .prominent)  // High elevation
+```
+
+### Adaptive Corner Radius
+
+Proportional corner radius system that scales consistently across device sizes:
+
+```swift
+// Using percentage (0% = square, 100% = circle)
+RoundedRectangle(cornerRadius: 0)
+    .fill(.blue)
+    .frame(width: 100, height: 100)
+    .adaptiveCornerRadius(40, size: CGSize(width: 100, height: 100))
+
+// Using predefined styles
+RoundedRectangle(cornerRadius: 0)
+    .adaptiveCornerRadius(CornerRadiusStyle.round, size: size)
+
+// Available styles
+CornerRadiusStyle.square    // 0%   - Perfect squares
+CornerRadiusStyle.slight    // 15%  - Subtle corners
+CornerRadiusStyle.moderate  // 40%  - Balanced
+CornerRadiusStyle.round     // 65%  - Prominent curves
+CornerRadiusStyle.circle    // 100% - Perfect circles
+
+// Calculate radius independently
+let radius = View.calculateCornerRadius(percent: 50, size: size)
+```
 
 ## Documentation
 

@@ -28,6 +28,13 @@ import SwiftUI
 /// ### Manual Navigation (Advanced)
 /// - `.clearNavigationBackground()` - Manual modifier for precise control
 ///
+/// ### View Modifiers
+/// - `.if(_:transform:)` - Conditional view modifier for cleaner code
+/// - `.glassShadow(isPressed:intensity:)` - Unified shadow system for Liquid Glass UI
+/// - `.adaptiveCornerRadius(_:size:)` - Proportional corner radius system
+/// - `CornerRadiusStyle` - Predefined corner radius presets
+/// - `ShadowIntensity` - Shadow intensity levels (.subtle, .regular, .prominent)
+///
 /// ### Color System
 /// - `ColorPalette` - Flexible color palette with gradient configuration
 /// - Sample palettes: `.sunset`, `.ocean`, `.forest`, `.monochrome`
@@ -65,7 +72,7 @@ import SwiftUI
 ///
 public struct SeaBearKit {
     /// Library version
-    public static let version = "1.2.0"
+    public static let version = "1.3.0"
 
     /// Library name
     public static let name = "SeaBearKit"
